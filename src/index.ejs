@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="fr-FR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title><%= locals.title; %> - ProConnect</title>
+    <script>
+      function handleAcrChange() {
+        const acrSelect = document.getElementById('acr');
+        const amrInput = document.getElementById('amr');
+        const acrValue = acrSelect.value;
+
+        const AMR_ACR_MAPPING = {
+          'https://proconnect.gouv.fr/assurance/self-asserted': 'pwd',
+          'https://proconnect.gouv.fr/assurance/self-asserted-2fa':
+            'pwd, pop, mfa',
+          'https://proconnect.gouv.fr/assurance/consistency-checked': 'pwd',
+          'https://proconnect.gouv.fr/assurance/certification-dirigeant': 'pwd',
+          eidas1: 'pwd',
+          eidas2: 'pwd, mfa',
+          eidas3: 'pop',
+        };
+
+        amrInput.value = AMR_ACR_MAPPING[acrValue] || '';
+      }
+    </script>
+  </head>
+  <body>
+    <main>
+      <section container="">
+        <h1><%= locals.title; %></h1>
+        <h2>Se connecter</h2>
+        <form
+          autocomplete="off"
+          action="/interaction/<%= locals.uid %>/login"
+          method="post"
+        >
+          <div>
+            <label for="email">email</label>
+            <input
+              type="text"
+              id="email"
+              name="email"
+              value="<%= locals.email %>"
+            />
+          </div>
+          <div>
+            <label for="sub">sub</label>
+            <input
+              type="text"
+              id="sub"
+              name="sub"
+              value="<%= locals.defaultUser.sub %>"
+            />
+          </div>
+          <div>
+            <label for="acr">Niveaux d'authentification (ACR)</label>
+            <select onchange="handleAcrChange()" id="acr" name="acr">
+              <option value="eidas1">Accès de type login / mot de passe</option>
+              <option value="eidas2">
+                Accès de type login / mot de passe + un second facteur
+              </option>
+              <option value="eidas3">
+                Accès via une carte agent, avec PIN + certificats
+              </option>
+              <option
+                value="https://proconnect.gouv.fr/assurance/self-asserted"
+              >
+                Identité déclarative simple
+              </option>
+              <option
+                value="https://proconnect.gouv.fr/assurance/self-asserted-2fa"
+              >
+                Identité déclarative + authentification à double facteur.
+              </option>
+              <option
+                value="https://proconnect.gouv.fr/assurance/consistency-checked"
+              >
+                Identité déclarative + test(s) de cohérence
+              </option>
+              <option
+                value="https://proconnect.gouv.fr/assurance/certification-dirigeant"
+              >
+                Statut de dirigeant de l'organisation
+              </option>
+            </select>
+          </div>
+          <br />
+          <details>
+            <summary id="open-custom-configuration">Usage avancé</summary>
+            <p>
+              <small>
+                Liste des valeurs qui seront typés en sortie de l'idp : 'true',
+                'false', 'null', 'undefined', 'empty', 'empty-array'. Les champs
+                laissés vide ne seront pas renvoyés.
+              </small>
+            </p>
+            <div>
+              <label for="given_name">given_name</label>
+              <input
+                type="text"
+                id="given_name"
+                name="given_name"
+                value="<%= locals.defaultUser.given_name %>"
+              />
+            </div>
+            <div>
+              <label for="usual_name">usual_name</label>
+              <input
+                type="text"
+                id="usual_name"
+                name="usual_name"
+                value="<%= locals.defaultUser.usual_name %>"
+              />
+            </div>
+            <div>
+              <label for="siret">siret</label>
+              <input
+                type="text"
+                id="siret"
+                name="siret"
+                value="<%= locals.defaultUser.siret %>"
+              />
+            </div>
+            <div>
+              <label for="is_service_public">is_service_public</label>
+              <input
+                type="text"
+                id="is_service_public"
+                name="is_service_public"
+                value="<%= locals.defaultUser.is_service_public %>"
+              />
+            </div>
+
+            <div>
+              <label for="amr">amr (séparés par des virgules)</label>
+              <input
+                type="text"
+                id="amr"
+                name="amr"
+                value="<%= locals.amr %>"
+              />
+            </div>
+
+            <div>
+              <label for="phone_number">phone_number</label>
+              <input
+                type="text"
+                id="phone_number"
+                name="phone_number"
+                value="<%= locals.defaultUser.phone_number %>"
+              />
+            </div>
+          </details>
+          <details>
+            <summary id="open-error-configuration">Erreur</summary>
+            <div>
+              <label for="error">error</label>
+              <input type="text" id="error" name="error" value="" />
+            </div>
+            <div>
+              <label for="error_description">error_description</label>
+              <input
+                type="text"
+                id="error_description"
+                name="error_description"
+                value=""
+              />
+            </div>
+          </details>
+          <br />
+          <button type="submit">Se connecter</button>
+        </form>
+        <details>
+          <summary id="open-debug-info">Informations de débogage</summary>
+          <pre><code><%= locals.debugInfo %></code></pre>
+        </details>
+      </section>
+    </main>
+    <link rel="stylesheet" href="<%= locals.stylesheetUrl; %>" />
+  </body>
+</html>

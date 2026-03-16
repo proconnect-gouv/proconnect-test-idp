@@ -1,0 +1,27 @@
+{
+  "name": "proconnect-test-idp",
+  "version": "1.0.0",
+  "description": "Mock identity provider for OIDC",
+  "main": "dist/main.js",
+  "repository": "https://github.com/proconnect-gouv/proconnect-test-idp",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/main.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "ejs": "^5.0.1",
+    "express": "^5.2.1",
+    "lodash": "^4.17.23",
+    "oidc-provider": "^8.8.0",
+    "quick-lru": "^7.3.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/lodash": "^4.17.24",
+    "@types/oidc-provider": "^8.8.0",
+    "typescript": "5.5.4"
+  }
+}
