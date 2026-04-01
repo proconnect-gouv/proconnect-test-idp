@@ -56,32 +56,38 @@
           <div>
             <label for="acr">Niveaux d'authentification (ACR)</label>
             <select onchange="handleAcrChange()" id="acr" name="acr">
-              <option value="eidas1">Accès de type login / mot de passe</option>
+              <option value="eidas1">
+                Accès de type login / mot de passe (eidas1)
+              </option>
               <option value="eidas2">
-                Accès de type login / mot de passe + un second facteur
+                Accès de type login / mot de passe + un second facteur (eidas2)
               </option>
               <option value="eidas3">
-                Accès via une carte agent, avec PIN + certificats
+                Accès via une carte agent, avec PIN + certificats (eidas3)
               </option>
               <option
                 value="https://proconnect.gouv.fr/assurance/self-asserted"
               >
                 Identité déclarative simple
+                (https://proconnect.gouv.fr/assurance/self-asserted)
               </option>
               <option
                 value="https://proconnect.gouv.fr/assurance/self-asserted-2fa"
               >
-                Identité déclarative + authentification à double facteur.
+                Identité déclarative + authentification à double facteur
+                (https://proconnect.gouv.fr/assurance/self-asserted-2fa)
               </option>
               <option
                 value="https://proconnect.gouv.fr/assurance/consistency-checked"
               >
                 Identité déclarative + test(s) de cohérence
+                (https://proconnect.gouv.fr/assurance/consistency-checked)
               </option>
               <option
                 value="https://proconnect.gouv.fr/assurance/certification-dirigeant"
               >
                 Statut de dirigeant de l'organisation
+                (https://proconnect.gouv.fr/assurance/certification-dirigeant)
               </option>
             </select>
           </div>
