@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "description": "Mock identity provider for OIDC",
   "main": "dist/main.js",
-  "repository": "https://github.com/proconnect-gouv/proconnect-test-idp",
-  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/proconnect-gouv/proconnect-test-idp.git"
+  },
+  "license": "AGPL-3.0",
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "start": "node dist/main.js"
+    "start": "node dist/main.js",
+    "lint": "prettier --write '**/*.{ts,ejs}'"
   },
   "dependencies": {
     "dotenv": "^17.3.1",
@@ -22,6 +26,17 @@
     "@types/express": "^5.0.6",
     "@types/lodash": "^4.17.24",
     "@types/oidc-provider": "^8.8.0",
+    "prettier": "^3.8.4",
+    "prettier-plugin-ejs": "^1.0.3",
     "typescript": "5.5.4"
+  },
+  "engines": {
+    "node": ">=20",
+    "npm": ">=10"
+  },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-ejs"
+    ]
   }
 }
