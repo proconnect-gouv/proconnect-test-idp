@@ -13,7 +13,15 @@ const {
 } = config;
 
 export default {
-  acrValues: ["eidas1", "eidas2", "eidas3"],
+  acrValues: [
+      "eidas0",
+      "eidas0-mfa",
+      "eidas1",
+      "eidas1-mfa",
+      "eidas2",
+      "eidas3",
+      "https://proconnect.gouv.fr/assurance/certification-dirigeant",
+  ],
   claims: {
     amr: null,
     // standard claims
